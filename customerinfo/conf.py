@@ -10,6 +10,6 @@ TIME_STRFMT_DJGTAG_S = 'M d, Y'
 # time format for django datetime field
 TIME_STRFMT_DJANGO = '%Y-%m-%d %H:%M:%S'
 # Avatar server base url 
-AVATAR_BASE_URL = 'https://tf-amr-1.devtools.intel.com/avatar'
+AVATAR_BASE_URL = ''
 
 ENCODING = 'utf-8'
