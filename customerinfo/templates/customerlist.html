@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% load myfilters %}
+{% block mainpage %}
+    <div id="common_body" class="commonBody">
+      <div>
+        <div style="">
+          <div class="screen">
+            <div class="screen_headerLine">
+              <div class="screenHeader">
+                <span class="cis-InlineLabel">Customer List</span>
+              </div>
+            </div>
+
+            <div class="searchPanel">
+              <form id="search_form">{% csrf_token %}
+                <input type="hidden" id="sort_col" name="sort_col" value="id">
+                <input type="hidden" id="sort_dir" name="sort_dir" value="">
+                <input id="qstr" type="text" name="qstr" class="searchTextBox inputFieldTypeHint" size="50">
+                <button type="button" class="searchButton">Search</button>
+                <span id="clst_loading" class="loading">
+                  <img src="{% static "img/loading.gif" %}"/><span></span>
+                </span>
+              </form>
+            </div><br>
+
+            <div id="customer_list" style="display: none;">
+              <table class="changeTable accountDashboard" style="width: 100%;">
+                <tbody>
+                  <tr id="clst_header">
+                    <td class="data_header"></td>
+                    <td class="data_header"><a class="sortby_id" href="">ID</a></td>
+                    <td class="data_header"><a class="sortby_first_name" href="">First Name</a></td>
+                    <td class="data_header"><a class="sortby_last_name" href="">Last Name</a></td>
+                    <td class="data_header"><a class="sortby_state" href="">State</a></td>
+                    <td class="data_header"><a class="sortby_email" href="">Email</a></td>
+                    <td class="data_header">Phone</td>
+                    <td class="data_header"><a class="sortby_created_time" href="">Created</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><!-- end of customer_list -->
+
+    <!-- templates html for customer list -->
+    <script type = "text/javascript">
+        var row_tmpl = function() {/*
+                  <tr class="needsReview">
+                    <td class="data_cell">%%NAME_IMG%%</td>
+                    <td class="data_cell">
+                      <div><a class="cis-InlineHyperlink" target="_blank" href="/customer/%%C_ID%%">%%C_ID%%</a></div>
+                    </td>
+                    <td class="data_cell">%%C_FIRST_NAME%%</td>
+                    <td class="data_cell">%%C_LAST_NAME%%</td>
+                    <td class="data_cell">%%C_STATE%%</td>
+                    <td class="data_cell">%%C_EMAIL%%</td>
+                    <td class="data_cell">%%C_PHONE%%</td>
+                    <td class="data_cell">%%C_CREATED%%</td>
+                  </tr>
+*/}.toString().slice(14,-3);
+
+        var empty_row_tmpl = function() {/*
+                  <tr>
+                    <td colspan="%%COLCNT%%" class="emptySection">No customer is found</td>
+                  </tr>
+*/}.toString().slice(14,-3);
+    </script>
+
+          </div><!-- end of screen -->
+        </div>
+      </div>
+    </div><!-- end of common_body -->
+{% endblock %}

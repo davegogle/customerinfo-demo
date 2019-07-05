@@ -1,0 +1,88 @@
+{% load static %}
+{% load myfilters %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ title }}
+    </title>
+    <meta charset="utf-8">
+    <meta content="locale=en_US" name="cis:property">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.1/css/all.css">
+    <link rel="stylesheet" href="{% static "common-1.css" %}">
+    <link rel="stylesheet" href="{% static "common-2.css" %}">
+    <link rel="stylesheet" href="{% static "customerinfo.css" %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="common_topmenu" class="commonTopMenu">
+      <table class="topmenu">
+        <colgroup>
+          <col>
+          <col>
+          <col>
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="topmenuTDmenu">
+            </td>
+            <td class="topmenuTDglue">
+              <div>
+              </div>
+            </td>
+            <td class="topmenuTDmenu">
+              <div class="topmenuMenuRight">
+                <div class="linkMenuBar" role="menubar">
+                  <div tabindex="0" class="menuBarUserNameFocusPanel">
+                    <input type="text" tabindex="-1" aria-hidden="true" style="opacity: 0; height: 1px; width: 1px; z-index: -1; overflow: hidden; position: absolute;">
+                    <div class="menuBarUserNamePanel">
+                      <span class="menuBarUserName">{{request.user|uname_display}},&nbsp;&nbsp;&nbsp;<a href="{% url 'logout' %}?next={{request.path|urlencode}}">Sign Out</a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- end of common_topmenu -->
+    <div id="common_header">
+    </div>
+
+{% block mainpage %}{% endblock %}
+
+    <div class="common_footer" style="clear: both">
+      <div id="common_footer">
+      </div>
+      <div id="common_btmmenu">
+        <span class="cis-InlineHTML">Contact:
+          <a href="mailto:davegogle@gmail.com" target="_blank">davegogle@gmail.com
+          </a>
+        </span>
+      </div>
+    </div><!-- end of clear: both -->
+    <script src="{% static "customerinfo.js" %}" type="text/javascript"></script>
+    <div class="userInfoPopup" style="left: 0px; top: 0px; position: absolute; overflow: visible; visibility: hidden;">
+      <div class="popupContent">
+        <div class="UserPopupPanel_panel">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <img class="UserPopupPanel_avatar" aria-hidden="true" style="display: none;">
+                </td>
+                <td class="UserPopupPanel_infoCell"><br/><br/>
+                  <div class="UserPopupPanel_userName">Lin, Dave</div>
+                  <div class="UserPopupPanel_email">dave.lin@intel.com</div><br/><br/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="UserPopupPanel_userLinks">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

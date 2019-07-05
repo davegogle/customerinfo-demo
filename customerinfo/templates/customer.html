@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+{% load myfilters %}
+{% block mainpage %}
+    <div id="common_body" class="commonBody">
+        <div class="commonScreen_cs2">
+            <div class="commonScreen_headerLine">
+                <div class="commonScreen_subjectLine">
+                    <div class="commonScreen_idAndStatus">
+                        <span class="commonScreen_statusText">
+                            Customer Information of {{customer.display_name}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- customer information section -->
+            <table class="change_infoTable">
+                <tbody>
+                <tr>
+                    <td>
+                        <table><tbody>
+                            <tr>
+                                <th class="info_header">First Name:</th>
+                                <td class="info_cell"><span>{{customer.first_name}}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">Last Name:</th>
+                                <td class="info_cell"><span>{{customer.last_name}}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">Email Address:</th>
+                                <td class="info_cell"><span>{{customer.email}}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">Phone Number:</th>
+                                <td class="info_cell"><span>{{customer.phone}}</span></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                    <td><span style="padding: 20px;"></span></td>
+                    <td>
+                        <table><tbody>
+                            <tr>
+                                <th class="info_header">Customer ID:</th>
+                                <td class="info_cell"><span>{{customer.id}}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">Created Time:</th>
+                                <td class="info_cell"><span>{{customer.created_time|date:'M d, Y H:i'}}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">Customer State:</th>
+                                <td class="info_cell">
+                                    <form id="state_form">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="form_saved_state" name="form_saved_state" value="{{customer.state}}"/>
+                                        <input type="hidden" id="form_cid" name="form_cid" value="{{customer.id}}"/>
+                                        <select id="form_state" name="form_state" class="">
+{% for s in state_choices %}
+                                            <option value="{{s.0}}" 
+    {% ifequal s.0 customer.state %}
+                                                selected
+    {% endifequal %}
+                                            >{{s.1}}</option>
+{% endfor %}
+                                        </select>
+                                        <div class="state_actions">
+                                            <button id="state_form_save" class="" title="Change state">
+                                                <span class="aui-icon aui-icon-small aui-iconfont-success">Save</span>
+                                            </button>
+                                            <button id="state_form_cancel" class="" title="Cancel">
+                                                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Cancel</span>
+                                            </button>
+                                            <span id="chgsta_loading" class="loading">
+                                                <img src="{% static "img/loading.gif" %}"/><span></span>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="info_header">&nbsp;</th>
+                                <td class="info_cell"><span></span></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- end of customer information section -->
+
+            <!-- note list -->
+            <div class="note-window">
+                <!-- note list header -->
+                <div class="commonScreen_sectionHeader commonScreen_headerButtons">
+                    Notes
+                    <button id="action_add">
+                        <span class="aui-icon aui-icon-small aui-iconfont-add">Add</span>
+                    </button>
+                    <span id="cmtlst_loading" class="loading">
+                      <img src="{% static "img/loading.gif" %}"/><span></span>
+                    </span>
+                </div>
+
+                <!-- note list body -->
+                <div class="commonScreen_Content-2" id="notelist">
+
+    <!-- templates html for customer list -->
+    <script type = "text/javascript">
+        var login_user_id = {{request.user.id}};
+        var row_tmpl = function() {/*
+                    <div class="note_messageBox">
+                        <div class="note_contents">
+                            <div class="note_header">
+                                <div class="note_id" style="display: none;">%%N_ID%%</div>
+                                <div class="note_name" title="%%AUTHOR_EMAIL%%">
+                                    %%AUTHOR_IMG%%<span>%%AUTHOR_NAME%% - %%N_UPDATED%%</span>
+                                </div>
+                                <div class="note_action">
+%%ACTION_BUTTON_HTML%%
+                                </div>
+                            </div>
+                            <div style="overflow: auto">
+                                <div class="note_text"><br>
+                                    <p>%%N_TEXT%%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+*/}.toString().slice(14,-3);
+
+        var action_btns_tmpl = function() {/*
+                                    <button type="button" class="action_edit" title="Edit this note">
+                                        <span class="aui-icon aui-icon-small aui-iconfont-edit">Edit</span>
+                                    </button>
+                                    <button type="button" class="action_delete" title="Delete this note">
+                                        <span class="aui-icon aui-icon-small aui-iconfont-delete">delete</span>
+                                    </button>
+*/}.toString().slice(14,-3);
+
+        var empty_row_tmpl = function() {/*
+                    <div class="note_messageBox note_closed">None</div>
+*/}.toString().slice(14,-3);
+    </script>
+
+
+                </div><!-- end of note list body -->
+            </div><!-- end of note list -->
+
+            <!-- note edit dialog -->
+            <div class="note_dialog">
+                <div class="title">Add Note</div>
+                <form action="" name="note_form" id="note_form">
+                    {% csrf_token %}
+                    <input type="hidden" id="form_cid" name="form_cid" value="{{customer.id}}"/>
+                    <input type="hidden" id="form_nid" name="form_nid" value=""/>
+                    <input type="hidden" id="form_action_type" name="form_action_type" value=""/>
+                    <input type="hidden" id="form_changed" name="form_changed" value="false"/>
+                    <div class="note_text">
+                        <textarea name="form_note_text" id="form_note_text"></textarea><br>
+                    </div>
+                    <hr class="hr">
+                    <div class="buttonset">
+                        <button class="add" type="button" id="form_action_add">Add</button>
+                        <button class="cancel" type="button" id="form_action_cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- end of note edit dialog -->
+
+        </div>
+    </div>
+{% endblock %}
