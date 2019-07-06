@@ -12,10 +12,10 @@ setup(
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
-    license='BSD License',  # example license
+    license='BSD License',
     description='A simple Django app to manage customer information.',
     long_description=README,
-    url='https://www.example.com/',
+    url='',
     author='Dave Lin',
     author_email='davegogle@gmail.com',
     classifiers=[
@@ -25,10 +25,11 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
+    install_requires=[
+        'django-xmlrpc>=0.1.8',
+    ]
 )
