@@ -31,7 +31,7 @@ customer data directly from the database.
 ![Class graph of models](https://github.com/davegogle/customerinfo-demo/raw/master/docs/customerinfo-models.png)
 
 # Demo
-[Demo on Youtube](https://youtu.be/eoYLGgOkeTo)
+[Demo on Youtube](https://www.youtube.com/watch?v=eoYLGgOkeTo)
 
 # Install
 ## Dependencies
@@ -39,7 +39,7 @@ customer data directly from the database.
 - django-extensions >= v2.1.0
 - django-xmlrpc >= v0.1.8
 
-To install::
+To install:
 ```console
 $ git clone https://github.com/davegogle/customerinfo-demo.git
 $ cd customerinfo-demo && sudo python3 setup.py install
@@ -66,7 +66,7 @@ XMLRPC_METHODS = (
 And also include customerinfo.url in your local urls.py.
 
 # Uninstall
-If you want to uninstall this app, issue the following command::
+If you want to uninstall this app, issue the following command:
 ```console
 $ sudo pip3 uninstall customerinfo-demo
 ```
@@ -77,7 +77,7 @@ from database.
 - creaete_or_update_customer(): create or update customer information in database
 - get_customer(): get customer information from database
 
-Example of using XML-PRC API::
+Example of using XML-PRC API:
 ```python
 import xmlrpc.client as xmlrpc
 
