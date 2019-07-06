@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 STATIC_URL = '/static/'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'customerinfodemo', '.intel.com', '10.238.158.65' ]
 
 SITE_ID = 1
 
@@ -172,4 +172,9 @@ LOGGING = {
 #
 # For XMLPRC service
 #
-XMLRPC_METHODS = (('customerinfo.xmlrpc_server.test_xmlrpc', 'test_xmlrpc'),)
+XMLRPC_METHODS = (
+    ('customerinfo.xmlrpc_server.test_xmlrpc', 'test_xmlrpc'),
+    ('customerinfo.xmlrpc_server.create_or_update_customer',
+     'create_or_update_customer'),
+    ('customerinfo.xmlrpc_server.get_customer', 'get_customer'),
+)
