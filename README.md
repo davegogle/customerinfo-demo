@@ -1,4 +1,4 @@
-# CustomerInfoDemo - An demo app for managing the customer information
+# CustomerInfoDemo - A demo app for managing customer information
 
 CustomeInfo is a B/S mode application and based on Django framework. It provides
 essential functionalities for managing the customer information as well as the 
@@ -10,11 +10,13 @@ customer data directly from the database.
 ### Templates
 - customerlist.html: present the customer list which can be searched and sorted
                      by vary field.
+
+![Customer list page example](https://github.com/davegogle/customerinfo-demo/raw/master/docs/customerlist.png)
+
 - customer.html: show the details of customer information as well as the note
                  list. The customer state can be changed and the note can be
                  added, updated and removed.
 
-![Customer list page example](https://github.com/davegogle/customerinfo-demo/raw/master/docs/customerlist.png)
 ![Customer details page example](https://github.com/davegogle/customerinfo-demo/raw/master/docs/customer.png)
 
 ### Views
@@ -25,10 +27,11 @@ customer data directly from the database.
 - ajax_note_list(): handle the requests of adding, updating and removing note
 
 ### Models:
+
 ![Class graph of models](https://github.com/davegogle/customerinfo-demo/raw/master/docs/customerinfo-models.png)
 
 # Demo
-![Demo on Youtube](https://youtu.be/eoYLGgOkeTo)
+[Demo on Youtube](https://youtu.be/eoYLGgOkeTo)
 
 # Install
 ## Dependencies
@@ -46,17 +49,17 @@ Then you need to add below lines in your local Django server's settings.py:
 
 ```console
 INSTALLED_APPS = [
-    ...
+    ...,
     'customerinfo.apps.CustomerInfoConfig',
-    ....
+    ...
 ]
 
 XMLRPC_METHODS = (
-    ....
+    ...,
     ('customerinfo.xmlrpc_server.create_or_update_customer',
      'create_or_update_customer'),
     ('customerinfo.xmlrpc_server.get_customer', 'get_customer'),
-    ....
+    ...
 )
 ```
 
@@ -89,5 +92,6 @@ server.create_or_update_customer({
     'first_name': 'David',
     'last_name': 'Foo',
     'email': 'david.foo@example.com',
-    'phone': '(66) 02 1234-5678'})
+    'phone': '(66) 02 1234-5678'
+})
 ```
